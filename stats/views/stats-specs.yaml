@@ -1,0 +1,35 @@
+swagger: "2.0"
+info:
+  description: "This microservice handles stats computation requests"
+  version: "1.0.0"
+  title: "Stats Microservice"
+schemes:
+- "http"
+paths:
+  /stats/:
+    get:
+      summary: "Returns the writer score for the specified user"
+      description: "Returns a float representing the score of the specified user"
+      operationId: "stats"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "writer_id"
+        in: "query"
+        description: "User id"
+        required: true
+        type: "integer"
+      - name: "user_id"
+        in: "query"
+        description: "User id"
+        required: true
+        type: "integer"
+      responses:
+        '200':
+          description: "successful operation"
+          schema:
+            type: "number"
+            format: "float"
+        '404':
+          description: "User not found"
+          
