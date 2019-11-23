@@ -5,7 +5,7 @@ from flask import request, jsonify, abort
 from flakon import SwaggerBlueprint
 
 
-stats = SwaggerBlueprint('stats', 'stats', swagger_spec='views/stats-specs.yaml')
+stats = SwaggerBlueprint('stats', 'stats', swagger_spec='stats-specs.yaml')
 
 """
 This endpoint returns the stats for the specified user

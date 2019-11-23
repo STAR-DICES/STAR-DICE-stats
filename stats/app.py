@@ -3,37 +3,16 @@ import json
 import os
 
 from stats.views import blueprints
-from flakon import create_app
 
+from flakon import create_app
 from swagger_ui import api_doc
 
 
 def start(test = False):
-    app=create_app(blueprints=blueprints)
-    app.config['WTF_CSRF_SECRET_KEY'] = 'A SECRET KEY'
-    app.config['SECRET_KEY'] = 'ANOTHER ONE'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///follows.db'
+    app = create_app(blueprints=blueprints)
     if test:
         app.config['TESTING'] = True
-        app.config['CELERY_ALWAYS_EAGER'] = True
-        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
-        app.config['WTF_CSRF_ENABLED'] = False
-        app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-    api_doc(app, config_path='./follows/static/follows-specs.yaml', url_prefix='/api', title='API doc')
-    db.init_app(app)
-    db.create_all(app=app)
-
-    with app.app_context():
-        q = db.session.query(Follow)
-        user = q.first()
-        if user is None:
-            example = Follow(1, 2, "Pippo")
-            example2 = Follow(3, 2, "Pippo")
-            db.session.add(example)
-            db.session.add(example2)
-            db.session.commit()
-
+    api_doc(app, config_path='follows-specs.yaml', url_prefix='/api', title='API doc')
     return app
 
 if __name__ == '__main__':

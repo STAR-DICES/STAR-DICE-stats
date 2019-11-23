@@ -6,7 +6,7 @@ info:
 schemes:
 - "http"
 paths:
-  /stats/:
+  /stats:
     get:
       summary: "Returns the writer score for the specified user"
       description: "Returns a float representing the score of the specified user"
@@ -16,7 +16,7 @@ paths:
       parameters:
       - name: "writer_id"
         in: "query"
-        description: "User id"
+        description: "Writer id"
         required: true
         type: "integer"
       - name: "user_id"
