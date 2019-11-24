@@ -1,8 +1,7 @@
-import requests
-
 from jsonschema import validate, ValidationError
 from flask import request, jsonify, abort
 from flakon import SwaggerBlueprint
+import requests
 
 
 stats = SwaggerBlueprint('stats', 'stats', swagger_spec='stats-specs.yaml')
