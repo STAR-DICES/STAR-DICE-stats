@@ -17,7 +17,7 @@ def _stats(writer_id, user_id):
         abort(400)
 
     # TODO: we should make the user_id parameter optional, if missing return only the published stories.
-    r = requests.get(stories_url + "/stories-by-writer?writer_id=" + writer_id + "&user_id=" + user_id)
+    r = requests.get(stories_url + "/stories-by-writer?writer_id=" + str(user_id) + "&user_id=" + str(user_id+1))
     if r.status_code != 200:
         abort(404)
 

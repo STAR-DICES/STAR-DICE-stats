@@ -6,7 +6,7 @@ info:
 schemes:
 - "http"
 paths:
-  /stats:
+  /stats/{user_id}:
     get:
       summary: "Returns the writer score for the specified user"
       description: "Returns a float representing the score of the specified user"
@@ -14,13 +14,8 @@ paths:
       produces:
       - "application/json"
       parameters:
-      - name: "writer_id"
-        in: "query"
-        description: "Writer id"
-        required: true
-        type: "integer"
       - name: "user_id"
-        in: "query"
+        in: "path"
         description: "User id"
         required: true
         type: "integer"
