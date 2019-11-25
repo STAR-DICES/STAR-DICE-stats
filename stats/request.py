@@ -1,24 +1,23 @@
 import requests
+import json
 
 
 class Request:
     def __init__(self, get_stories, timeout=1):
-        self.get_stories = get_stories
-        self.timeout = timeout
+        self._get_stories = get_stories
+        self._timeout = timeout
 
-    def get_stories(author_id):
-        return self.get_stories(author_id, timeout=self.timeout)
-
-def real_get_stories(author_id, timeout):
-    return requests.get(stories_url + "/stories?writer_id=" + str(author_id), timeout=timeout)
+    def get_stories(self, author_id):
+        return self._get_stories(author_id, self._timeout)
 
 class Response:
     def __init__(self, status_code, response_data):
         self.status_code = status_code
-        self.json = json.dumps(response_data)
+        self._json = json.dumps(response_data)
 
-    def get_json(self):
-        return self.json
+    def json(self):
+        return self._json
+
 
 existing_response = {
     'stories': [{
@@ -38,9 +37,16 @@ existing_response = {
 }
 
 def test_get_stories(author_id, timeout):
+    return Response(200, existing_response)
     if author_id == 1:
+        print('correct')
         return Response(200, existing_response)
+    print('error')
     return Response(404, None)
 
-real_request = Request(real_get_stories)
+def real_get_stories(author_id, timeout):
+    return requests.get(stories_url + "/stories?writer_id=" + str(author_id), timeout=timeout)
+
+
 test_request = Request(test_get_stories)
+real_request = Request(real_get_stories)

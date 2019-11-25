@@ -1,7 +1,8 @@
-from stats import request
+import json
 
 from jsonschema import validate, ValidationError
 from flask import request, jsonify, abort
+from flask import current_app as app
 from flakon import SwaggerBlueprint
 
 
@@ -10,19 +11,18 @@ stats = SwaggerBlueprint('stats', 'stats', swagger_spec='stats-specs.yaml')
 """
 This endpoint returns the stats for the specified user
 """
-@stats.operation('stats')
+@stats.operation('get_stats')
 def _stats(user_id):
     # Maybe not needed.
-    if not general_validator('stats', user_id):
+    if not general_validator('get_stats', user_id):
         abort(400)
 
-    # TODO: we should make the user_id parameter optional, if missing return only the published stories.
-    r = request.get_stories(user_id)
+    r = app.request.get_stories(user_id)
     if r.status_code != 200:
-        abort(404)
+        abort(500)
 
     stories = json.loads(r.json())
-    return jsonify({'score': compute_score(stories)})
+    return jsonify({'score': compute_score(stories['stories'])})
 
 def general_validator(op_id, request):
     schema = stats.spec['paths']

@@ -10,7 +10,7 @@ paths:
     get:
       summary: "Returns the writer score for the specified user"
       description: "Returns a float representing the score of the specified user"
-      operationId: "stats"
+      operationId: "get_stats"
       produces:
       - "application/json"
       parameters:
