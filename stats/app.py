@@ -20,5 +20,5 @@ def start(test=False):
     return app
 
 if __name__ == '__main__':
-    app = start(host=0.0.0.0)
+    app = start(host='0.0.0.0')
     app.run()
