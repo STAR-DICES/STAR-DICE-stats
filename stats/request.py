@@ -12,7 +12,7 @@ class Request:
     def get_stories(self, author_id):
         return self._get_stories(author_id, self._timeout)
 
-class Response:
+class TestResponse:
     def __init__(self, status_code, response_data):
         self.status_code = status_code
         self._json = json.dumps(response_data)
@@ -39,11 +39,13 @@ existing_response = {
 }
 
 def test_get_stories(author_id, timeout):
+    print('a')
     if author_id == 1:
-        return Response(200, existing_response)
-    return Response(404, None)
+        return TestResponse(200, existing_response)
+    return TestResponse(404, None)
 
 def real_get_stories(author_id, timeout):
+    print('b')
     return requests.get(stories_url + "/stories?writer_id=" + str(author_id), timeout=timeout)
 
 

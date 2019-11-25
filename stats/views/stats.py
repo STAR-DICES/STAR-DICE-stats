@@ -14,6 +14,7 @@ This endpoint returns the stats for the specified user
 """
 @stats.operation('get_stats')
 def _stats(user_id):
+    user_id = int(user_id)
     r = app.request.get_stories(user_id)
     if r.status_code != 200:
         abort(404)
