@@ -24,8 +24,8 @@ class TestResponse:
 existing_response = {
     'stories': [{
         'story_id': 1,
-        'title': 'Test title',
-        'text': '',
+        'title': 'Spooky',
+        'text': 'The green zombie waves at the green ghost.',
         'rolls_outcome': ['zombie', 'ghost', 'green', 'goo'],
         'theme': "Halloween",
         'data': '10/10/1010',
@@ -39,13 +39,11 @@ existing_response = {
 }
 
 def test_get_stories(author_id, timeout):
-    print('a')
     if author_id == 1:
         return TestResponse(200, existing_response)
     return TestResponse(404, None)
 
 def real_get_stories(author_id, timeout):
-    print('b')
     return requests.get(stories_url + "/stories?writer_id=" + str(author_id), timeout=timeout)
 
 

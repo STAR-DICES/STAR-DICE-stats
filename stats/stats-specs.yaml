@@ -23,8 +23,16 @@ paths:
         '200':
           description: "successful operation"
           schema:
-            type: "number"
-            format: "float"
+            $ref: "#/definitions/Score"
         '404':
           description: "User not found"
-          
+definitions:
+  Score:
+    type: "object"
+    properties:
+      score:
+        type: "number"
+        format: "float"
+    required:
+    - "score"
+    additionalProperties: false

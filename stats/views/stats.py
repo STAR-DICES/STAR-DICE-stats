@@ -20,7 +20,6 @@ def _stats(user_id):
         abort(404)
 
     stories = json.loads(r.json())['stories']
-    stories = [namedtuple("Story", s.keys())(*s.values()) for s in stories]
     return jsonify({'score': compute_score(stories)})
 
 """
@@ -33,8 +32,8 @@ def compute_score(stories):
     tot_dislikes = 0
     for story in stories:
         tot_stories += 1
-        tot_likes += story.likes
-        tot_dislikes += story.dislikes
+        tot_likes += story['likes']
+        tot_dislikes += story['dislikes']
     if tot_stories == 0:
         return 0
     if tot_likes == 0:

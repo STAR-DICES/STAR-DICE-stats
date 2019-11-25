@@ -2,13 +2,14 @@ import unittest
 import json
 
 from stats.app import start
-
-
-class TestStats(unittest.TestCase):
-    def setUp(self):
+from flask_testing import TestCase
+ 
+class TestHelper(TestCase): # pragma: no cover
+    def create_app(self):
         self.app = start(test=True)
         self.context = self.app.app_context()
         self.client = self.app.test_client()
+        return self.app
 
     def tearDown(self):
         self.app = None
@@ -21,8 +22,7 @@ class TestStats(unittest.TestCase):
 
     def test_known_user(self):
         reply = self.client.get('/stats/1')  # Known user_id
-        print(reply)
         self.assertEqual(reply.status_code, 200)
-        #data = reply.json()
-        #self.assertEqual(data, json.dumps({'score': 10}))
+        result = json.loads(reply.data)
+        self.assertEqual(result, {'score': 10.0})
 
