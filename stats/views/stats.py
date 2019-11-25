@@ -11,7 +11,7 @@ stats = SwaggerBlueprint('stats', 'stats', swagger_spec='stats-specs.yaml')
 This endpoint returns the stats for the specified user
 """
 @stats.operation('stats')
-def _stats(writer_id, user_id):
+def _stats(user_id):
     # Maybe not needed.
     if not general_validator('stats', user_id):
         abort(400)
@@ -25,7 +25,7 @@ def _stats(writer_id, user_id):
     return jsonify({'score': compute_score(stories)})
 
 def general_validator(op_id, request):
-    schema = follows.spec['paths']
+    schema = stats.spec['paths']
     for endpoint in schema.keys():
         for method in schema[endpoint].keys():
             if schema[endpoint][method]['operationId'] != op_id:
@@ -36,7 +36,7 @@ def general_validator(op_id, request):
                 return True
 
             definition= op_schema['schema']['$ref'].split("/")[2]
-            schema= follows.spec['definitions'][definition]
+            schema= stats.spec['definitions'][definition]
             try:
                 validate(request.get_json(), schema=schema)
             except ValidationError as error:

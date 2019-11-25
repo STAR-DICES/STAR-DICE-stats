@@ -22,5 +22,5 @@ def start(test = False):
     return app
 
 if __name__ == '__main__':
-    app = start(test=True)
+    app = start()
     app.run()
