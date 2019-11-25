@@ -28,7 +28,7 @@ existing_response = {
         'text': 'The green zombie waves at the green ghost.',
         'rolls_outcome': ['zombie', 'ghost', 'green', 'goo'],
         'theme': "Halloween",
-        'data': '10/10/1010',
+        'date': '10/10/1010',
         'likes': 10,
         'dislikes': 1,
         'published': True,
