@@ -2,6 +2,8 @@ import requests
 import json
 
 
+stories_url = '127.0.0.1:6000'  # TODO: insert real stories microservice url
+
 class Request:
     def __init__(self, get_stories, timeout=1):
         self._get_stories = get_stories
@@ -37,7 +39,6 @@ existing_response = {
 }
 
 def test_get_stories(author_id, timeout):
-    return Response(200, existing_response)
     if author_id == 1:
         return Response(200, existing_response)
     return Response(404, None)

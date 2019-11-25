@@ -16,7 +16,7 @@ def start(test=False):
         app.request = test_request
     else:
         app.request = real_request
-    api_doc(app, config_path='stats-specs.yaml', url_prefix='/api', title='API doc')
+    api_doc(app, config_path='stats/stats-specs.yaml', url_prefix='/api', title='API doc')
     return app
 
 if __name__ == '__main__':

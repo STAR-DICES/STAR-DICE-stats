@@ -1,17 +1,17 @@
+import unittest
 import json
 
-from flask_testing import TestCase
 
-
-class TestStats(TestCase):
-    def create_app(self):
-        self.app = create_app(test=True)
+class TestStats(unittest.TestCase):
+    def setUp(self):
+        self.app = start(test=True)
         self.context = self.app.app_context()
         self.client = self.app.test_client()
-        return self.app
 
     def tearDown(self):
-        pass
+        self.app = None
+        self.context = None
+        self.client = None
     
     def unknown_user(self):
         reply = self.client.get('/stats/400')  # Unknown user_id
