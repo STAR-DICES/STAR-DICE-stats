@@ -16,10 +16,9 @@ def start(test=False):
         app.request = test_request
     else:
         app.request = real_request
-    app.request.get_stories(1)
     api_doc(app, config_path='stats-specs.yaml', url_prefix='/api', title='API doc')
     return app
 
 if __name__ == '__main__':
-    app = start(test=True)
+    app = start(test)
     app.run()

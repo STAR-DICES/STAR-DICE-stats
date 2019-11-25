@@ -21,5 +21,5 @@ class TestStats(TestCase):
         reply = self.client.get('/stats/1')  # Known user_id
         self.assertEqual(reply.status_code, 200)
         data = json.loads(reply.get_json())
-        self.assertEqual(data, {'score': 1})  # TODO: substiture real expected score
+        self.assertEqual(data, {'score': 10})
 

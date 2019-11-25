@@ -39,9 +39,7 @@ existing_response = {
 def test_get_stories(author_id, timeout):
     return Response(200, existing_response)
     if author_id == 1:
-        print('correct')
         return Response(200, existing_response)
-    print('error')
     return Response(404, None)
 
 def real_get_stories(author_id, timeout):

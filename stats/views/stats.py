@@ -1,3 +1,4 @@
+from collections import namedtuple
 import json
 
 from jsonschema import validate, ValidationError
@@ -19,10 +20,11 @@ def _stats(user_id):
 
     r = app.request.get_stories(user_id)
     if r.status_code != 200:
-        abort(500)
+        abort(404)
 
-    stories = json.loads(r.json())
-    return jsonify({'score': compute_score(stories['stories'])})
+    stories = json.loads(r.json())['stories']
+    stories = [namedtuple("Story", s.keys())(*s.values()) for s in stories]
+    return jsonify({'score': compute_score(stories)})
 
 def general_validator(op_id, request):
     schema = stats.spec['paths']
