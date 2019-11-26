@@ -1,5 +1,4 @@
 from collections import namedtuple
-import json
 
 from jsonschema import validate, ValidationError
 from flask import request, jsonify, abort
@@ -19,7 +18,7 @@ def _stats(user_id):
     if r.status_code != 200:
         abort(404)
 
-    stories = json.loads(r.json())['stories']
+    stories = r.json()['stories']
     return jsonify({'score': compute_score(stories)})
 
 """

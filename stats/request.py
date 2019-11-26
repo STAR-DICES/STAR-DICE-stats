@@ -15,7 +15,7 @@ class Request:
 class TestResponse:
     def __init__(self, status_code, response_data):
         self.status_code = status_code
-        self._json = json.dumps(response_data)
+        self._json = response_data
 
     def json(self):
         return self._json
